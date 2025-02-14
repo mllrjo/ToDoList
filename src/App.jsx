@@ -1,10 +1,18 @@
 import { useReducer, useState } from "react";
-import TextInput from "./TextInput";
-import MyForm from "./MyForm";
+// import TextInput from "./TextInput";
+// import MyForm from "./MyForm";
 // import {initialState} from "./ToDoList";
 
 export default function App() {
-  const [name, setName] = useState("");
+//  const [name, setName] = useState("");
+//  const [task, dispatch] = useReducer(taskReducer, initialState);
+
+  // const taskList = task.map((member) => {
+  //   return (
+  //     whatever
+  //   );
+  // });
+
   return (
     <>
       <MyForm />

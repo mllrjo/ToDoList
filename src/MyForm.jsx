@@ -1,11 +1,13 @@
 export default function MyForm() {
     return (
-      <>
+      <div>
         <label>
          <input name="myInput" defaultValue="Add task" />
         </label>
+        <label>
         <button>Add</button>
         <hr />
+        </label>
         <label>
           <input type="checkbox" name="myCheckbox" defaultChecked={true} />
           Create Mockup
@@ -25,7 +27,7 @@ export default function MyForm() {
         </label>
         <button>Save</button>
         <hr />
-      </>
-    );
-  }
+      </div>
+  )
+}
   
