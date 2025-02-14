@@ -1,0 +1,11 @@
+export default function Home({ dispatch, state} ) {
+
+    function displayData() {
+        let list = dispatch({type: 'displayAllData'})
+        let list2 = list.map(el) => {
+            return {
+
+            }
+        }
+    }
+}
