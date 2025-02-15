@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
 // import TextInput from "./TextInput";
-// import MyForm from "./MyForm";
+import MyForm from "./MyForm";
 // import {initialState} from "./ToDoList";
 
 export default function App() {
@@ -15,7 +15,9 @@ export default function App() {
 
   return (
     <>
-      <MyForm />
+      <div className="container">
+        <MyForm />
+      </div>
     </>
   );
 }
