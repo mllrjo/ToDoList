@@ -1,0 +1,31 @@
+<div id="root">
+    <h1>Prague itinerary</h1>
+    <input placeholder="Add task" value="">
+    <button>Add</button>
+    <ul>
+        <li>
+            <label>
+                <input type="checkbox" checked="">
+                Visit Kafka Museum
+                <button>Edit</button>
+                <button>Delete</button>
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox">
+                Watch a puppet show
+                <button>Edit</button>
+                <button>Delete</button>
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox">
+                Lennon Wall pic
+                <button>Edit</button>
+                <button>Delete</button>
+            </label>
+        </li>
+    </ul>
+</div>

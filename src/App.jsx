@@ -1,147 +1,80 @@
-import { useReducer, useState } from "react";
-// import TextInput from "./TextInput";
-import MyForm from "./MyForm";
-// import {initialState} from "./ToDoList";
+import { useReducer } from 'react';
+import AddTask from './AddTask.jsx';
+import TaskList from './TaskList.jsx';
 
-export default function App() {
-//  const [name, setName] = useState("");
-//  const [task, dispatch] = useReducer(taskReducer, initialState);
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [...tasks, {
+        id: action.id,
+        text: action.text,
+        done: false
+      }];
+    }
+    case 'changed': {
+      return tasks.map(t => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter(t => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
 
-  // const taskList = task.map((member) => {
-  //   return (
-  //     whatever
-  //   );
-  // });
+export default function TaskApp() {
+  const [tasks, dispatch] = useReducer(
+    tasksReducer,
+    initialTasks
+  );
+
+  function handleAddTask(text) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      text: text,
+    });
+  }
+
+  function handleChangeTask(task) {
+    dispatch({
+      type: 'changed',
+      task: task
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: 'deleted',
+      id: taskId
+    });
+  }
 
   return (
     <>
-      <div className="container">
-        <MyForm />
-      </div>
+      <h1>Prague itinerary</h1>
+      <AddTask
+        onAddTask={handleAddTask}
+      />
+      <TaskList
+        tasks={tasks}
+        onChangeTask={handleChangeTask}
+        onDeleteTask={handleDeleteTask}
+      />
     </>
   );
 }
 
-
-const initialState = [
-  {
-    "userId": 1,
-    "id": 1,
-    "title": "delectus aut autem",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 2,
-    "title": "quis ut nam facilis et officia qui",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 3,
-    "title": "fugiat veniam minus",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 4,
-    "title": "et porro tempora",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 5,
-    "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 6,
-    "title": "qui ullam ratione quibusdam voluptatem quia omnis",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 7,
-    "title": "illo expedita consequatur quia in",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 8,
-    "title": "quo adipisci enim quam ut ab",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 9,
-    "title": "molestiae perspiciatis ipsa",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 10,
-    "title": "illo est ratione doloremque quia maiores aut",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 11,
-    "title": "vero rerum temporibus dolor",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 12,
-    "title": "ipsa repellendus fugit nisi",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 13,
-    "title": "et doloremque nulla",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 14,
-    "title": "repellendus sunt dolores architecto voluptatum",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 15,
-    "title": "ab voluptatum amet voluptas",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 16,
-    "title": "accusamus eos facilis sint et aut voluptatem",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 17,
-    "title": "quo laboriosam deleniti aut qui",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 18,
-    "title": "dolorum est consequatur ea mollitia in culpa",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 19,
-    "title": "molestiae ipsa aut voluptatibus pariatur dolor nihil",
-    "completed": true
-  },
-  {
-    "userId": 1,
-    "id": 20,
-    "title": "ullam nobis libero sapiente ad optio sint",
-    "completed": true
-  }
+let nextId = 3;
+const initialTasks = [
+  { id: 0, text: 'Visit Kafka Museum', done: true },
+  { id: 1, text: 'Watch a puppet show', done: false },
+  { id: 2, text: 'Lennon Wall pic', done: false }
 ];
